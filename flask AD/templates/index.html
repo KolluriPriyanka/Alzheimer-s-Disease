@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Company Name</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- <link rel="stylesheet" href="style.css" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+      <style>
+    body {
+      text-align: center;
+      /*margin-top: 50px;*/
+    }
+
+    select {
+      font-size: 12px;
+      padding: 10px;
+    }
+  </style>
+
+  <script>
+    function openNewPage() {
+      var selectElement = document.getElementById('selectOption');
+      var selectedValue = selectElement.value;
+      if (selectedValue !== '') {
+        window.open(selectedValue, '_blank');
+      }
+    }
+  </script>
+
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav>
+      <div class="logo">
+        <img src="static/logo.png" alt="Company Logo" />
+        <h1>AtINeu (Artificial Intelligence in Neurology) </h1>
+      </div>
+      <ul class="nav-links">
+       <!-- <li><a href="#">Contacts Us</a></li>
+        <li><a href="#">About Us</a></li>   -->
+        <!-- <li><a href="stroke.html">AI Tool</a></li> -->
+
+        <!-- <select onchange="location = this.value;"> -->
+
+  <select id="selectOption" onchange="openNewPage()">
+          <option value="{{ url_for('index') }}" selected>Select AI Tool </option>
+          <option value="{{ url_for('stroke') }}" target='_blank'>Stroke</option>
+          <option value="{{ url_for('AD') }}" target='_blank'>Alzheimer</option>
+        </select>
+
+        <!-- <a href="{{ url_for('stroke') }}">AI Tool</a> -->
+
+      </ul>
+    </nav>
+    <!-- Header Section -->
+    <header>
+      <div class="header-text">
+        <h2>Welcome to our website</h2>
+        <p>Atineu is a leading research community dedicated to advancing Data Science and Artificial Intelligence. Our primary objective is to develop AI systems that benefit patients suffering from neurological disorders. Through the latest AI techniques, we aim to enable early detection and prediction in conditions such as epilepsy, stroke, headache, and Parkinson’s. We have several exciting projects planned, including a chatbot for stroke prevention and gait analysis. By harnessing medical big data to train AI-enabled systems, we provide faster and better medical care to those who need it most.</p>
+      </div>
+      <div class="header-image">
+        <img src="static/brain ML.jpg" alt="Company Image" />
+      </div>
+    </header>
+    <!-- Social Media Links -->
+    <div class="social-media" style="position: absolute; bottom: 0; width: 100%; background-color: #333; color: #fff; padding: 10px;">
+      <ul>
+        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+        <li><a href="http://atineu.org/"><i class="fas fa-globe"></i></a></li>
+      </ul>
+    </div>
+  </body>
+</html>

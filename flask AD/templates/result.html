@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Image Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        img {
+            display: block;
+            max-width: 500px;
+            margin: 0 auto;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 30px;
+        }
+
+        img {
+            display: block;
+            max-width: 500px;
+            margin: 0 auto;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>    
+</head>
+
+<body>
+    <h1>{{ predicted_class }}</h1>
+    {% if filename %}
+    <h3>Uploaded Image:</h3>
+    <img src="{{ url_for('display_image', filename=filename) }}" alt="uploaded image">
+    {% else %}
+    <h3>No image uploaded</h3>
+    {% endif %}
+</body>
+
+
+</html>

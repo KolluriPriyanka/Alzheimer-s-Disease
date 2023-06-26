@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Upload</title>
+    <style>
+      /* Add the CSS styles from the first HTML file here */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: #333;
+        color: #fff;
+      }
+
+      .nav-links li {
+        margin-right: 20px;
+      }
+
+      .nav-links a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo img {
+        height: 50px;
+        margin-right: 10px;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      label {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      input[type="file"] {
+        margin-top: 10px;
+      }
+
+      #preview {
+        max-width: 500px;
+        margin-top: 20px;
+      }
+
+      button {
+        margin-top: 20px;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #4caf50;
+        color: #fff;
+        font-size: 18px;
+        cursor: pointer;
+      }
+
+      button:active {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">
+        <h1>AtINeu AI Tool</h1>
+      </div>
+    </nav>
+    <form method="post" action="/ADPred" enctype="multipart/form-data">
+      
+    <!-- <form id="upload-form"> -->
+      <label for="image-upload">Choose an image to upload : ( Alzheimer Prediction ) </label>
+      <!-- <input type="file" id="image-upload" accept="image/*" /> -->
+      
+  <input type="file" name="file" class="form-control" autocomplete="off" required>
+
+      <div id="preview"></div>
+
+    <!-- <input type="submit" value="Submit" class="btn btn-info"> -->
+
+      <button type="submit" id="submit-button" value="Submit" class="btn btn-info" >Predict For AD</button>
+    </form>
+    <script>
+      const form = document.getElementById("upload-form");
+      const input = document.getElementById("image-upload");
+      const preview = document.getElementById("preview");
+      const button = document.getElementById("submit-button");
+
+      input.addEventListener("change", () => {
+        const file = input.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.addEventListener("load", () => {
+            preview.innerHTML = `<img src="${reader.result}" alt="Preview" />`;
+          });
+        } else {
+          preview.innerHTML = "";
+        }
+      });
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const file = input.files[0];
+        if (file) {
+          const formData = new FormData();
+          formData.append("image", file);
+          button.disabled = true;
+          fetch("/upload", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              alert(data.message);
+              button.disabled = false;
+            })
+            .catch((error) => {
+              alert(error.message);
+              button.disabled
+            })
+          
+        }})
